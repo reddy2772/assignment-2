@@ -6,7 +6,7 @@ import StudentList from './components/StudentList.jsx';
 import Toast from './components/Toast.jsx';
 import './App.css';
 
-const API = 'https://student-management-sys.onrender.com';
+const API = 'https://assignment-2-g0c5.onrender.com';
 
 const App = () => {
   const [students, setStudents] = useState([]);
