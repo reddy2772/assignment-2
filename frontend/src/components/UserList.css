@@ -1,0 +1,119 @@
+/* UserList.css */
+
+.user-list-container {
+  animation: fadeIn 0.5s ease;
+  padding: 2rem;
+}
+
+.user-list-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--dark-bg);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-list-icon {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.user-count {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  margin-left: 1rem;
+  font-weight: 600;
+}
+
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.no-users {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+  text-align: center;
+  color: var(--text-secondary);
+  backdrop-filter: blur(8px);
+}
+
+.no-users p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(52, 152, 219, 0.3);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1.5rem;
+}
+
+.loading-container p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Animation for list items */
+.user-list > div {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: staggeredFadeIn 0.5s ease forwards;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  padding: 1.5rem;
+}
+
+@keyframes staggeredFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered animations for list */
+.user-list > div:nth-child(1) { animation-delay: 0.1s; }
+.user-list > div:nth-child(2) { animation-delay: 0.2s; }
+.user-list > div:nth-child(3) { animation-delay: 0.3s; }
+.user-list > div:nth-child(4) { animation-delay: 0.4s; }
+.user-list > div:nth-child(5) { animation-delay: 0.5s; }
+.user-list > div:nth-child(n+6) { animation-delay: 0.6s; }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .user-list-container {
+    margin-top: 2rem;
+    padding: 1rem;
+  }
+
+  .user-list-title {
+    font-size: 1.5rem;
+  }
+}

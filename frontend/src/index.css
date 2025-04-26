@@ -1,0 +1,57 @@
+/* index.css - Updated Body and Code Styles */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);  /* Using the background color from the updated palette */
+  color: var(--text-primary);  /* Global text color */
+  line-height: 1.7;
+  transition: all 0.3s ease;  /* Smooth transition for background color or other changes */
+}
+
+code {
+  font-family: 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New', monospace;
+  color: var(--primary-dark);  /* Added primary color to code for consistency */
+  background-color: rgba(0, 0, 0, 0.05);  /* Light background to make code stand out */
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* Customize anchor links */
+a {
+  color: var(--primary-color);  /* Primary color for links */
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--primary-dark);  /* Hover color for links */
+  text-decoration: underline;
+}
+
+/* Add transition for smooth hover effects */
+button,
+a,
+input,
+select,
+textarea {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 4px var(--primary-light);  /* Highlight on focus */
+}
+
+/* For better accessibility, remove text selection color on body */
+body::selection {
+  background-color: var(--primary-light);
+  color: white;
+}
+

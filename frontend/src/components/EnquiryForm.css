@@ -1,0 +1,155 @@
+/* EnquiryForm.css */
+
+.form-container {
+  background: rgba(255, 255, 255, 0.85); /* Glassmorphism effect */
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  backdrop-filter: blur(8px); /* Blur effect */
+  animation: fadeIn 0.5s ease;
+}
+
+.form-title {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark-bg);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.enquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Increased gap for better spacing */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Increased space between label and input */
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 1rem; /* Increased font size for better readability */
+  color: var(--text-secondary);
+}
+
+.file-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Increased gap between file input and label */
+}
+
+.file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Increased gap for visual clarity */
+  padding: 0.75rem 1rem;
+  background-color: var(--light-bg);
+  border: 2px dashed var(--border-color);
+  border-radius: 6px; /* Rounded corners for a cleaner look */
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.file-label:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+  border-color: var(--primary-color);
+}
+
+.file-icon {
+  font-size: 1.5rem; /* Increased icon size */
+}
+
+.file-name {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+  padding-left: 0.75rem; /* Adjusted padding for balance */
+}
+
+.form-actions {
+  display: flex;
+  gap: 1.25rem; /* Increased gap between buttons */
+  margin-top: 1.5rem; /* Adjusted margin for better spacing */
+}
+
+.submit-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.75rem; /* Increased padding for better button size */
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px; /* Adjusted width for consistency */
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px); /* Smooth hover effect */
+}
+
+.submit-btn.loading {
+  background-color: var(--primary-dark);
+}
+
+.cancel-btn {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 2px solid var(--border-color);
+  padding: 0.75rem 1.75rem; /* Adjusted padding */
+  border-radius: 8px; /* Rounded corners for consistency */
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background-color: #f1f1f1;
+  color: var(--text-primary);
+  transform: translateY(-2px); /* Smooth hover effect */
+}
+
+.form-group input:focus {
+  animation: pulse 1s ease;
+  outline: none; /* Remove outline for focus */
+  border-color: var(--primary-color);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(52, 152, 219, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+  }
+}
+
+/* Animation for form appearance */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

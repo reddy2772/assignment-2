@@ -1,0 +1,38 @@
+/* AppHeader.css */
+
+.app-header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: #ffffff;
+  padding: 2rem 1rem;
+  text-align: center;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  animation: fadeDown 0.5s ease;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.app-header p {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Animation */
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
