@@ -4,16 +4,19 @@ const cors = require('cors');
 const multer = require('multer');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const cloudinary = require('./cloudinary');
-const Student = require('./models/studentSchema');
+const Student = require('./models/studentSchema'); // updated model
 
 const app = express();
 
-// Middlewares
-app.use(cors());
+// ✅ Allow frontend render app
+app.use(cors({
+  origin: 'https://assignment-2-1-q86z.onrender.com'
+}));
+
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI || "your-fallback-local-mongodb", {
+mongoose.connect("mongodb+srv://manyareddy2795:hasini@cluster0.fl8unpr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -31,32 +34,28 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage });
 
-// Routes
-
 // Get all students
 app.get('/students', async (req, res) => {
   try {
     const students = await Student.find();
     res.json(students);
-  } catch (error) {
+  } catch (err) {
     res.status(500).json({ error: 'Failed to fetch students' });
   }
 });
 
-// Get student by ID
+// Get a student by ID
 app.get('/students/:id', async (req, res) => {
   try {
     const student = await Student.findById(req.params.id);
-    if (!student) {
-      return res.status(404).json({ error: 'Student not found' });
-    }
+    if (!student) return res.status(404).json({ error: 'Student not found' });
     res.json(student);
-  } catch (error) {
+  } catch (err) {
     res.status(500).json({ error: 'Failed to fetch student' });
   }
 });
 
-// Create new student
+// Add new student with image upload
 app.post('/students', upload.single('profilePhoto'), async (req, res) => {
   try {
     const {
@@ -85,13 +84,13 @@ app.post('/students', upload.single('profilePhoto'), async (req, res) => {
     });
 
     await student.save();
-    res.status(201).json({ message: 'Student added successfully', student });
-  } catch (error) {
+    res.json({ message: 'Student added successfully', student });
+  } catch (err) {
     res.status(500).json({ error: 'Failed to add student' });
   }
 });
 
-// Update student
+// Update student info
 app.put('/students/:id', upload.single('profilePhoto'), async (req, res) => {
   try {
     const {
@@ -105,6 +104,8 @@ app.put('/students/:id', upload.single('profilePhoto'), async (req, res) => {
       isActive,
     } = req.body;
 
+    const profilePhoto = req.file ? req.file.path : undefined;
+
     const updatedData = {
       studentId,
       firstName,
@@ -115,21 +116,18 @@ app.put('/students/:id', upload.single('profilePhoto'), async (req, res) => {
       enrollmentYear,
       isActive,
     };
+    if (profilePhoto) updatedData.profilePhoto = profilePhoto;
 
-    if (req.file) {
-      updatedData.profilePhoto = req.file.path;
-    }
+    const updatedStudent = await Student.findByIdAndUpdate(
+      req.params.id,
+      updatedData,
+      { new: true }
+    );
 
-    const updatedStudent = await Student.findByIdAndUpdate(req.params.id, updatedData, {
-      new: true,
-    });
+    if (!updatedStudent) return res.status(404).json({ error: 'Student not found' });
 
-    if (!updatedStudent) {
-      return res.status(404).json({ error: 'Student not found' });
-    }
-
-    res.json({ message: 'Student updated successfully', student: updatedStudent });
-  } catch (error) {
+    res.json({ message: 'Student updated successfully', updatedStudent });
+  } catch (err) {
     res.status(500).json({ error: 'Failed to update student' });
   }
 });
@@ -137,16 +135,13 @@ app.put('/students/:id', upload.single('profilePhoto'), async (req, res) => {
 // Delete student
 app.delete('/students/:id', async (req, res) => {
   try {
-    const deletedStudent = await Student.findByIdAndDelete(req.params.id);
-    if (!deletedStudent) {
-      return res.status(404).json({ error: 'Student not found' });
-    }
+    await Student.findByIdAndDelete(req.params.id);
     res.json({ message: 'Student deleted successfully' });
-  } catch (error) {
+  } catch (err) {
     res.status(500).json({ error: 'Failed to delete student' });
   }
 });
 
-// Server listen
+// Server
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
